@@ -37,7 +37,7 @@ ME-LLM is a novel framework that enhances Large Language Models (LLMs) with **mu
 - **Pretraining Pipeline**: Includes dedicated pretraining stage for better time series understanding
 
 <p align="center">
-<img src="./figures/framework.png" height="360" alt="ME-LLM Framework" align=center />
+<img src="./figures/Fig1.png" height="360" alt="ME-LLM Framework" align=center />
 </p>
 
 ## Requirements
