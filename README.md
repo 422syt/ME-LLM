@@ -132,7 +132,7 @@ bash ./scripts/MELLM_ETTh1_ETTh2.sh
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `--task_name` | Task type: `long_term_forecast`, `short_term_forecast` | `long_term_forecast` |
-| `--model` | Model: `MELLM`, `Autoformer`, `DLinear` | `Autoformer` |
+| `--model` | Model: `MELLM`, `Autoformer`, `DLinear` | `MELLM` |
 | `--data` | Dataset name | `ETTm1` |
 | `--seq_len` | Input sequence length | `512` |
 | `--pred_len` | Prediction horizon | `96` |
