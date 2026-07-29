@@ -1,0 +1,52 @@
+# Checkpoints
+checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.idea/
+.vscode/
+
+# Claude
+.claude/
+
+# Virtual environments
+venv/
+.venv/
+
+# Distribution
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Models (large files)
+Llama/
+bert-base-uncased/
+
+# Datasets
+dataset/ETTh1/
+dataset/ETTh2/
+dataset/ETTm1/
+dataset/ETTm2/
+dataset/Electricity/
+dataset/ExchangeRate/
+dataset/METR-LA/
+dataset/PEMS-BAY/
+dataset/PEMS03/
+dataset/PEMS04/
+dataset/PEMS07/
+dataset/PEMS08/
+dataset/Weather/
+dataset/BeijingAirQuality/
+
+# Wheel files
+*.whl
