@@ -4,10 +4,8 @@ Versioned, manuscript-specific release for **"ME-LLM: Multimodal-Enhanced Pretra
 Language Models for Semantic-Aware Time Series Forecasting"** (IEEE Transactions on
 Big Data). Tag: `paper-v1.0`.
 
-The layout mirrors the HuggingFace repository
-`mldi-lab/ConTSG-Bench-Checkpoints`: every reported value is linked to its configuration,
-seed, and raw result file through the `experiments/` tree, with a top-level index in
-`manifests/`.
+Every reported value is linked to its configuration, seed, and raw result file through
+the `experiments/` tree, with a top-level index in `manifests/`.
 
 ## Release Scope
 

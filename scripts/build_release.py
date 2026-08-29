@@ -1,24 +1,19 @@
-"""Build the ConTSG-style GitHub reproducibility release for the ME-LLM paper.
+"""Generate the reproducibility release files for the ME-LLM paper.
 
-Mirrors the directory structure of the HuggingFace repository
-``mldi-lab/ConTSG-Bench-Checkpoints``, adapted to ME-LLM:
+Writes, for every Section IV value, a per-experiment directory that links the
+reported metric to its training config, seed, and result file:
 
     experiments/ME-LLM/<dataset>/<pred_len>/seed2021/
         config.template.json                     (per-value training config)
         results/expected_seed_metrics.json       (MSE / MAE)
         summary.json                             (status / best_checkpoint)
         checkpoints/finetune/.gitkeep            (checkpoint NOT shipped -> HF)
-    expected/
-        full_results.csv                         (every reported value)
-        results_mean_std.csv                     (main-table means; std not reported)
-        seed_metrics_nested.json                 (model -> dataset -> pred_len -> seed)
-    manifests/release_manifest_public.json       (top-level index)
-    resources/README.md                          (frozen BERT backbone note)
-    scripts/README.txt                           (reproduction instructions)
 
-All values are the paper's Section IV 10-seed means (seed 2021, itr 10; seeds
-2021-2030). Per-seed raw result files and model checkpoints are NOT shipped in
-this GitHub repository: checkpoints are published separately on HuggingFace.
+Also writes the aggregated result files under expected/ and the top-level index
+manifests/release_manifest_public.json. All values are the paper's Section IV
+10-seed means (seed 2021, itr 10; seeds 2021-2030). Per-seed raw result files and
+model checkpoints are NOT shipped in this GitHub repository: checkpoints are
+published separately on HuggingFace.
 
 Run from the repository root:
     /d/anaconda/envs/basicTS/python.exe scripts/build_release.py

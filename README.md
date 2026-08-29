@@ -83,10 +83,10 @@ python run_main.py \
 
 ## Reproducibility Release
 
-This repository ships a manuscript-specific reproducibility release (tag `paper-v1.0`)
-that follows the structure of the ConTSG-Bench checkpoint release. Every reported value
-in Section IV is linked to its configuration, seed, and raw result file through the
-`experiments/` tree, with a top-level index in `manifests/release_manifest_public.json`.
+This repository ships a manuscript-specific reproducibility release (tag `paper-v1.0`).
+Every reported value in Section IV is linked to its configuration, seed, and raw result
+file through the `experiments/` tree, with aggregated results in `expected/` and a
+top-level index in `manifests/release_manifest_public.json`.
 
 ```text
 experiments/ME-LLM/<dataset>/<pred_len>/seed2021/
@@ -94,13 +94,6 @@ experiments/ME-LLM/<dataset>/<pred_len>/seed2021/
 ├── results/expected_seed_metrics.json    # {MSE, MAE}
 ├── summary.json                          # status / best_checkpoint
 └── checkpoints/finetune/                 # checkpoint NOT shipped (see note)
-expected/
-├── full_results.csv                      # every reported value (one row per value)
-├── results_mean_std.csv                  # main-table means
-└── seed_metrics_nested.json              # model -> dataset -> pred_len -> seed -> metric
-manifests/release_manifest_public.json    # top-level index
-resources/                                # frozen BERT backbone note
-scripts/README.txt                        # reproduction instructions
 ```
 
 Experiments use Adam, validation-based model selection, early-stopping patience 5, and
@@ -121,7 +114,7 @@ ME-LLM/
 │   ├── build_release.py
 │   └── repro/
 ├── configs/                              # 24 per-value configs (source)
-├── experiments/                          # ConTSG-style per-value tree
+├── experiments/                          # per-value tree
 ├── expected/                             # reported values (CSV + nested JSON)
 ├── manifests/
 │   └── release_manifest_public.json
