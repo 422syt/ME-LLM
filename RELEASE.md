@@ -56,7 +56,10 @@ All reported values are **means over 10 seeds (2021-2030)**.
 - **Checkpoint**: model checkpoints are **not shipped** in this GitHub repository,
   consistent with the official releases of Time-LLM (KimMeen/Time-LLM), TimesNet and
   iTransformer (thuml), which publish code and scripts only. They are published
-  separately on HuggingFace and can be regenerated via `scripts/repro/`.
+  separately on HuggingFace at
+  [huggingface.co/Syttt422/ME-LLM-Checkpoints](https://huggingface.co/Syttt422/ME-LLM-Checkpoints),
+  which hosts the trained checkpoints for ETTh1/ETTh2/ETTm1/Weather (`pred_len` 96);
+  the remaining checkpoints can be regenerated via `scripts/repro/`.
 - **Raw result files**: per-seed raw result JSONs are not shipped; the `expected/`
   files record the paper's reported means, and `experiments/.../results/` holds the
   per-value `{MSE, MAE}` for each seed directory.
@@ -64,4 +67,5 @@ All reported values are **means over 10 seeds (2021-2030)**.
 ## Related Links
 
 - Repository: https://github.com/422syt/ME-LLM
+- Checkpoints: https://huggingface.co/Syttt422/ME-LLM-Checkpoints
 - Paper: IEEE Transactions on Big Data (manuscript)

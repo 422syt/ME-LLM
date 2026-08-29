@@ -22,9 +22,11 @@ experiments/ME-LLM/<dataset>/<pred_len>/seed2021/
 - `scripts/repro/` — regeneration scripts.
 
 See [RELEASE.md](RELEASE.md) for the full description. Model checkpoints are **not
-shipped** in this repository; they are published separately on HuggingFace and can be
-regenerated via `scripts/repro/`. The model source code lives on the `main` branch of
-this repository.
+shipped** in this repository; they are published separately on HuggingFace at
+[huggingface.co/Syttt422/ME-LLM-Checkpoints](https://huggingface.co/Syttt422/ME-LLM-Checkpoints),
+which hosts the trained checkpoints for ETTh1/ETTh2/ETTm1/Weather (`pred_len` 96). The
+remaining checkpoints can be regenerated via `scripts/repro/`. The model source code
+lives on the `main` branch of this repository.
 
 ## Citation
 
