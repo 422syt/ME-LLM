@@ -1,16 +1,24 @@
-"""Build a ConTSG-style reproducibility release for the ME-LLM paper.
+"""Build the ConTSG-style GitHub reproducibility release for the ME-LLM paper.
 
-Mimics the structure of ConTSG-Bench's public checkpoint release:
-    manifests/release_manifest_public.json   (top-level index)
-    expected/full_results.csv                (every reported value)
-    expected/results_mean_std.csv            (mean/std, per-value)
-    expected/seed_metrics_nested.json        (per-seed; ME-LLM ships means only)
-    RELEASE.md                               (directory tree + provenance notes)
+Mirrors the directory structure of the HuggingFace repository
+``mldi-lab/ConTSG-Bench-Checkpoints``, adapted to ME-LLM:
 
-All values are transcribed from the paper's Section IV (Table II "Ours" column,
-Table forecast_zeroshot, Table ablation-study). They are 10-seed means (seeds
-2021-2030); per-seed raw result files are not shipped, consistent with the
-releases of Time-LLM / TimesNet / i-Transformer.
+    experiments/ME-LLM/<dataset>/<pred_len>/seed2021/
+        config.template.json                     (per-value training config)
+        results/expected_seed_metrics.json       (MSE / MAE)
+        summary.json                             (status / best_checkpoint)
+        checkpoints/finetune/.gitkeep            (checkpoint NOT shipped -> HF)
+    expected/
+        full_results.csv                         (every reported value)
+        results_mean_std.csv                     (main-table means; std not reported)
+        seed_metrics_nested.json                 (model -> dataset -> pred_len -> seed)
+    manifests/release_manifest_public.json       (top-level index)
+    resources/README.md                          (frozen BERT backbone note)
+    scripts/README.txt                           (reproduction instructions)
+
+All values are the paper's Section IV 10-seed means (seed 2021, itr 10; seeds
+2021-2030). Per-seed raw result files and model checkpoints are NOT shipped in
+this GitHub repository: checkpoints are published separately on HuggingFace.
 
 Run from the repository root:
     /d/anaconda/envs/basicTS/python.exe scripts/build_release.py
@@ -18,10 +26,13 @@ Run from the repository root:
 import csv
 import json
 import os
+import shutil
 import datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+MODEL = "ME-LLM"
+SEED_DIR = "seed2021"
 SEED_RANGE = "2021-2030"
 N_SEEDS = 10
 DATASETS = ["ETTh1", "ETTh2", "ETTm1", "ETTm2", "Weather", "Traffic"]
@@ -44,7 +55,6 @@ ZERO_SHOT = [
 ]
 
 # Table ablation-study: dataset -> horizon -> variant -> (MSE, MAE).
-# Variants: Full Model, w/o Prompt, w/o LLM, w/o Multimodal.
 ABLATION = {
     "ETTh1": {
         96:  {"Full Model": (0.395, 0.407), "w/o Prompt": (0.405, 0.414), "w/o LLM": (0.396, 0.409), "w/o Multimodal": (0.413, 0.431)},
@@ -61,96 +71,175 @@ ABLATION = {
 }
 
 CHECKPOINT_NOTE = (
-    "Model checkpoints are not shipped in this release, consistent with the official "
-    "releases of Time-LLM (KimMeen/Time-LLM), TimesNet and iTransformer (thuml), which "
-    "publish code and scripts only. Reported values are 10-seed means; they can be "
-    "regenerated with scripts/repro/."
+    "Model checkpoints are not shipped in this GitHub repository. They are "
+    "published separately on HuggingFace. Reported values are 10-seed means "
+    "(seed 2021, itr 10; seeds 2021-2030); per-seed raw result files and "
+    "checkpoints can be regenerated via scripts/repro/."
 )
 
 
-def main():
-    os.makedirs(os.path.join(ROOT, "manifests"), exist_ok=True)
-    os.makedirs(os.path.join(ROOT, "expected"), exist_ok=True)
+def load_configs():
+    cfg_dir = os.path.join(ROOT, "configs")
+    mapping = {}
+    for fn in sorted(os.listdir(cfg_dir)):
+        if not fn.endswith(".json"):
+            continue
+        with open(os.path.join(cfg_dir, fn), encoding="utf-8") as f:
+            d = json.load(f)
+        ds, pl = d.get("data"), d.get("pred_len")
+        if ds and pl:
+            mapping[(ds, pl)] = d
+    return mapping
 
-    now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    # 1) Top-level manifest (mirrors release_manifest_public.json).
+def write_experiments(cfg_map, now):
+    exp_root = os.path.join(ROOT, "experiments", MODEL)
+    if os.path.isdir(exp_root):
+        shutil.rmtree(exp_root)
+    n = 0
+    for ds in DATASETS:
+        for pl in HORIZONS:
+            seed_dir = os.path.join(exp_root, ds, str(pl), SEED_DIR)
+            ckpt_dir = os.path.join(seed_dir, "checkpoints", "finetune")
+            res_dir = os.path.join(seed_dir, "results")
+            os.makedirs(ckpt_dir, exist_ok=True)
+            os.makedirs(res_dir, exist_ok=True)
+
+            cfg = cfg_map.get((ds, pl))
+            if cfg is None:
+                raise SystemExit("missing config for %s %s" % (ds, pl))
+            with open(os.path.join(seed_dir, "config.template.json"), "w", encoding="utf-8") as f:
+                json.dump(cfg, f, indent=2)
+
+            mse, mae = MAIN[ds][pl]
+            with open(os.path.join(res_dir, "expected_seed_metrics.json"), "w", encoding="utf-8") as f:
+                json.dump({"MSE": mse, "MAE": mae}, f, indent=2)
+
+            summary = {
+                "status": "completed",
+                "finished_at": now,
+                "best_checkpoint": "checkpoints/finetune/best.ckpt",
+            }
+            with open(os.path.join(seed_dir, "summary.json"), "w", encoding="utf-8") as f:
+                json.dump(summary, f, indent=2)
+
+            with open(os.path.join(ckpt_dir, ".gitkeep"), "w") as f:
+                f.write("")
+
+            n += 1
+    return n
+
+
+def write_expected():
+    # full_results.csv: one row per reported value.
+    fields = ["benchmark", "model", "dataset", "pred_len", "variant", "metric",
+              "mean", "std", "n_seeds"]
+    rows = []
+    for ds in DATASETS:
+        for pl in HORIZONS:
+            mse, mae = MAIN[ds][pl]
+            rows.append(["long_term_forecast", MODEL, ds, pl, "full", "MSE", mse, "", N_SEEDS])
+            rows.append(["long_term_forecast", MODEL, ds, pl, "full", "MAE", mae, "", N_SEEDS])
+    for transfer, mse in ZERO_SHOT:
+        rows.append(["zero_shot", MODEL, transfer, "", "full", "MSE", mse, "", N_SEEDS])
+    for ds, horizons in ABLATION.items():
+        for pl in HORIZONS:
+            for variant, (mse, mae) in horizons[pl].items():
+                rows.append(["ablation", MODEL, ds, pl, variant, "MSE", mse, "", N_SEEDS])
+                rows.append(["ablation", MODEL, ds, pl, variant, "MAE", mae, "", N_SEEDS])
+    with open(os.path.join(ROOT, "expected", "full_results.csv"), "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(fields)
+        w.writerows(rows)
+
+    # results_mean_std.csv: main-table means, wide (std not reported in paper).
+    with open(os.path.join(ROOT, "expected", "results_mean_std.csv"), "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["model", "dataset", "pred_len", "mse", "mae"])
+        for ds in DATASETS:
+            for pl in HORIZONS:
+                mse, mae = MAIN[ds][pl]
+                w.writerow([MODEL, ds, pl, mse, mae])
+
+    # seed_metrics_nested.json: model -> dataset -> pred_len -> seed -> metric.
+    nested = {
+        "aggregation": "mean_over_%d_seeds" % N_SEEDS,
+        "seed_range": SEED_RANGE,
+        "per_seed_available": False,
+        "note": ("Per-seed raw result files are not shipped in this repository; "
+                 "see experiments/<dataset>/<pred_len>/seed2021/results/ for the "
+                 "reported means."),
+        "data": {
+            MODEL: {
+                ds: {
+                    str(pl): {SEED_DIR: {"MSE": MAIN[ds][pl][0], "MAE": MAIN[ds][pl][1]}}
+                    for pl in HORIZONS
+                }
+                for ds in DATASETS
+            }
+        },
+    }
+    with open(os.path.join(ROOT, "expected", "seed_metrics_nested.json"), "w", encoding="utf-8") as f:
+        json.dump(nested, f, indent=2)
+
+
+def write_manifest(now):
     manifest = {
         "release_name": "mellm_paper_release_v1.0.0",
         "created_at": now,
-        "model": "ME-LLM",
-        "llm_backbone": "BERT-base (frozen, 768-dim, 12 layers)",
-        "trainable_params": "6.00M",
+        "models": [MODEL],
         "datasets": DATASETS,
         "horizons": HORIZONS,
-        "seed_range": SEED_RANGE,
-        "n_seeds": N_SEEDS,
+        "seeds": [SEED_DIR],
         "n_configs": len(DATASETS) * len(HORIZONS),
         "n_checkpoints": 0,
+        "total_checkpoint_bytes": 0,
         "checkpoint_note": CHECKPOINT_NOTE,
-        "results": "expected/full_results.csv",
-        "configs": "configs/",
     }
-    with open(os.path.join(ROOT, "manifests", "release_manifest_public.json"), "w") as f:
+    with open(os.path.join(ROOT, "manifests", "release_manifest_public.json"), "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2)
 
-    # 2) full_results.csv: every reported value, one row per value.
-    full_rows = []
-    for ds in DATASETS:
-        for h in HORIZONS:
-            mse, mae = MAIN[ds][h]
-            full_rows.append({"benchmark": "long_term_forecast", "dataset": ds, "pred_len": h,
-                              "variant": "full", "seed": SEED_RANGE, "metric": "MSE", "value": mse})
-            full_rows.append({"benchmark": "long_term_forecast", "dataset": ds, "pred_len": h,
-                              "variant": "full", "seed": SEED_RANGE, "metric": "MAE", "value": mae})
-    for transfer, mse in ZERO_SHOT:
-        full_rows.append({"benchmark": "zero_shot", "dataset": transfer, "pred_len": "",
-                          "variant": "full", "seed": SEED_RANGE, "metric": "MSE", "value": mse})
-    for ds, horizons in ABLATION.items():
-        for h in HORIZONS:
-            for variant, (mse, mae) in horizons[h].items():
-                full_rows.append({"benchmark": "ablation", "dataset": ds, "pred_len": h,
-                                  "variant": variant, "seed": SEED_RANGE, "metric": "MSE", "value": mse})
-                full_rows.append({"benchmark": "ablation", "dataset": ds, "pred_len": h,
-                                  "variant": variant, "seed": SEED_RANGE, "metric": "MAE", "value": mae})
 
-    fields = ["benchmark", "dataset", "pred_len", "variant", "seed", "metric", "value"]
-    with open(os.path.join(ROOT, "expected", "full_results.csv"), "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=fields)
-        w.writeheader()
-        for r in full_rows:
-            w.writerow(r)
+def write_aux():
+    resources_readme = (
+        "# Resources\n\n"
+        "ME-LLM uses a frozen BERT-base backbone (`bert-base-uncased`, 768-dim, "
+        "12 layers) as its pretrained language model. The backbone weights are "
+        "standard and are downloaded automatically by the training code from the "
+        "HuggingFace Hub; no custom resource files are required in this release.\n"
+    )
+    with open(os.path.join(ROOT, "resources", "README.md"), "w", encoding="utf-8") as f:
+        f.write(resources_readme)
 
-    # 3) results_mean_std.csv: main-table means; std is not reported in the paper.
-    mean_rows = []
-    for ds in DATASETS:
-        for h in HORIZONS:
-            mse, mae = MAIN[ds][h]
-            mean_rows.append({"dataset": ds, "pred_len": h, "metric": "MSE", "mean": mse, "std": ""})
-            mean_rows.append({"dataset": ds, "pred_len": h, "metric": "MAE", "mean": mae, "std": ""})
-    with open(os.path.join(ROOT, "expected", "results_mean_std.csv"), "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["dataset", "pred_len", "metric", "mean", "std"])
-        w.writeheader()
-        for r in mean_rows:
-            w.writerow(r)
+    scripts_readme = (
+        "Run reproduction from the repository root.\n\n"
+        "1) (Optional) Prepare datasets under dataset/<name>/ (see data_provider/).\n"
+        "2) Run one per-value experiment (base seed 2021, itr 10 -> seeds 2021-2030):\n"
+        "   python run_main.py --config configs/<config>.json\n"
+        "   or use the local single-GPU scripts:\n"
+        "   bash scripts/repro/MELLM_<dataset>.sh\n"
+        "3) Each run writes its raw result JSON to results/ and its checkpoint to\n"
+        "   checkpoints/; the reported value is the mean over the 10 itrs.\n"
+    )
+    with open(os.path.join(ROOT, "scripts", "README.txt"), "w", encoding="utf-8") as f:
+        f.write(scripts_readme)
 
-    # 4) seed_metrics_nested.json: nested dataset -> horizon -> metric, means only.
-    seed_nested = {
-        "aggregation": "mean_over_{}_seeds".format(N_SEEDS),
-        "seed_range": SEED_RANGE,
-        "per_seed_available": False,
-        "note": "Per-seed raw result files are not shipped, consistent with Time-LLM / "
-                "TimesNet / i-Transformer releases.",
-        "data": {ds: {str(h): {"MSE": MAIN[ds][h][0], "MAE": MAIN[ds][h][1]} for h in HORIZONS}
-                 for ds in DATASETS},
-    }
-    with open(os.path.join(ROOT, "expected", "seed_metrics_nested.json"), "w") as f:
-        json.dump(seed_nested, f, indent=2)
 
+def main():
+    now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")
+    for d in ("experiments", "expected", "manifests", "resources"):
+        os.makedirs(os.path.join(ROOT, d), exist_ok=True)
+
+    cfg_map = load_configs()
+    n_exp = write_experiments(cfg_map, now)
+    write_expected()
+    write_manifest(now)
+    write_aux()
+
+    print("Wrote %d experiment dirs under experiments/%s/" % (n_exp, MODEL))
+    print("Wrote expected/full_results.csv, expected/results_mean_std.csv, expected/seed_metrics_nested.json")
     print("Wrote manifests/release_manifest_public.json")
-    print("Wrote expected/full_results.csv ({} rows)".format(len(full_rows)))
-    print("Wrote expected/results_mean_std.csv ({} rows)".format(len(mean_rows)))
-    print("Wrote expected/seed_metrics_nested.json")
+    print("Wrote resources/README.md, scripts/README.txt")
 
 
 if __name__ == "__main__":

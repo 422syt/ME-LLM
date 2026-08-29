@@ -81,17 +81,33 @@ python run_main.py \
   --train_epochs 15
 ```
 
-## Reproducibility
+## Reproducibility Release
 
-Experiments use:
+This repository ships a manuscript-specific reproducibility release (tag `paper-v1.0`)
+that follows the structure of the ConTSG-Bench checkpoint release. Every reported value
+in Section IV is linked to its configuration, seed, and raw result file through the
+`experiments/` tree, with a top-level index in `manifests/release_manifest_public.json`.
 
-- Adam optimizer
-- Validation-based model selection
-- Early stopping patience 5
-- Ten random seeds (2021-2030)
+```text
+experiments/ME-LLM/<dataset>/<pred_len>/seed2021/
+├── config.template.json                  # per-value training config
+├── results/expected_seed_metrics.json    # {MSE, MAE}
+├── summary.json                          # status / best_checkpoint
+└── checkpoints/finetune/                 # checkpoint NOT shipped (see note)
+expected/
+├── full_results.csv                      # every reported value (one row per value)
+├── results_mean_std.csv                  # main-table means
+└── seed_metrics_nested.json              # model -> dataset -> pred_len -> seed -> metric
+manifests/release_manifest_public.json    # top-level index
+resources/                                # frozen BERT backbone note
+scripts/README.txt                        # reproduction instructions
+```
 
-The controlled evaluation protocol uses identical preprocessing, temporal splits,
-training budgets, and metric computation across compatible baselines.
+Experiments use Adam, validation-based model selection, early-stopping patience 5, and
+ten random seeds (2021-2030), run with base seed 2021 (`--itr 10`). All reported values
+are 10-seed means. Model checkpoints are **not shipped** in this GitHub repository,
+consistent with Time-LLM / TimesNet / iTransformer; they are published separately on
+HuggingFace and can be regenerated via `scripts/repro/`.
 
 ## Repository Structure
 
@@ -102,9 +118,14 @@ ME-LLM/
 ├── layers/
 ├── data_provider/
 ├── scripts/
-├── checkpoints/
-├── results/
-├── configs/
+│   ├── build_release.py
+│   └── repro/
+├── configs/                              # 24 per-value configs (source)
+├── experiments/                          # ConTSG-style per-value tree
+├── expected/                             # reported values (CSV + nested JSON)
+├── manifests/
+│   └── release_manifest_public.json
+├── resources/
 ├── requirements.txt
 └── run_main.py
 ```

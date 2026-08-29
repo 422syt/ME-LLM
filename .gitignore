@@ -1,5 +1,5 @@
 # Checkpoints
-checkpoints/
+/checkpoints/
 
 # Python
 __pycache__/
@@ -61,4 +61,4 @@ smoke_run.log
 smoke_test.log
 
 # Results (regenerated via scripts/repro/)
-results/
+/results/

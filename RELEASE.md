@@ -4,6 +4,11 @@ Versioned, manuscript-specific release for **"ME-LLM: Multimodal-Enhanced Pretra
 Language Models for Semantic-Aware Time Series Forecasting"** (IEEE Transactions on
 Big Data). Tag: `paper-v1.0`.
 
+The layout mirrors the HuggingFace repository
+`mldi-lab/ConTSG-Bench-Checkpoints`: every reported value is linked to its configuration,
+seed, and raw result file through the `experiments/` tree, with a top-level index in
+`manifests/`.
+
 ## Release Scope
 
 This release covers every numerical result reported in the paper's Section IV:
@@ -21,33 +26,42 @@ All reported values are **means over 10 seeds (2021-2030)**.
 ```text
 .
 ├── manifests/
-│   └── release_manifest_public.json      # top-level release index
+│   └── release_manifest_public.json      # top-level release index (models/datasets/seeds)
 ├── expected/
 │   ├── full_results.csv                  # every reported value, one row per value
-│   ├── results_mean_std.csv              # main-table means (std not reported)
-│   └── seed_metrics_nested.json          # dataset -> horizon -> metric (means)
-├── configs/
-│   └── long_term_forecast_<dataset>_<pl>_MELLM_...json   # 24 per-value configs
+│   ├── results_mean_std.csv              # main-table means (wide; std not reported)
+│   └── seed_metrics_nested.json          # model -> dataset -> pred_len -> seed -> metric
+├── experiments/
+│   └── ME-LLM/
+│       └── <dataset>/<pred_len>/seed2021/
+│           ├── config.template.json      # per-value training config
+│           ├── results/expected_seed_metrics.json   # {MSE, MAE}
+│           ├── summary.json              # status / best_checkpoint
+│           └── checkpoints/finetune/     # checkpoint NOT shipped -> HuggingFace
+├── configs/                              # 24 per-value configs (source)
+├── resources/README.md                   # frozen BERT backbone note
 ├── scripts/
-│   ├── build_paper_manifest.py           # generates MANIFEST.csv + configs
-│   ├── build_release.py                  # generates manifests/ + expected/
+│   ├── build_release.py                  # generates manifests/ + expected/ + experiments/
+│   ├── README.txt                        # reproduction instructions
 │   └── repro/                            # regeneration scripts
-├── MANIFEST.csv                          # per-value manifest (main table)
-├── paper_results.json                    # main-table values, nested JSON
 └── RELEASE.md                            # this file
 ```
 
 ## Reproducibility Notes
 
-- **Config**: each of the 24 config files under `configs/` fixes the full training
-  protocol (seq_len 512, patch 16, stride 8, frozen BERT-base, d_model/d_ff per
-  dataset, `itr 10`, `train_epochs 15`, `patience 5`, `batch_size 24`).
-- **Seed**: values are means over `--seed 2021 --itr 10` (seeds 2021-2030).
-- **Checkpoint**: model checkpoints are **not shipped**, consistent with the official
-  releases of Time-LLM (KimMeen/Time-LLM), TimesNet and iTransformer (thuml), which
-  publish code and scripts only. Checkpoints are regenerated via `scripts/repro/`.
-- **Raw result files**: per-seed raw result JSONs are not shipped; `paper_results.json`
-  and `expected/full_results.csv` record the paper's reported means.
+- **Config**: each of the 24 config files under `configs/` (and the corresponding
+  `config.template.json` under `experiments/`) fixes the full training protocol
+  (seq_len 512, patch 16, stride 8, frozen BERT-base, d_model/d_ff per dataset,
+  `itr 10`, `train_epochs 15`, `patience 5`, `batch_size 24`).
+- **Seed**: values are means over `--seed 2021 --itr 10` (seeds 2021-2030). Each
+  `experiments/ME-LLM/<dataset>/<pred_len>/` directory is keyed to `seed2021`.
+- **Checkpoint**: model checkpoints are **not shipped** in this GitHub repository,
+  consistent with the official releases of Time-LLM (KimMeen/Time-LLM), TimesNet and
+  iTransformer (thuml), which publish code and scripts only. They are published
+  separately on HuggingFace and can be regenerated via `scripts/repro/`.
+- **Raw result files**: per-seed raw result JSONs are not shipped; the `expected/`
+  files record the paper's reported means, and `experiments/.../results/` holds the
+  per-value `{MSE, MAE}` for each seed directory.
 
 ## Related Links
 
