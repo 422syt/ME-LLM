@@ -1,2 +1,0 @@
-Traffic is a collection of hourly data from California Department of Transportation, which describes the road occupancy rates measured by different sensors on San Francisco Bay area freeways.
-The input time series is processed into patches and fed to the LLM in a cross-modal interleaving manner: each raw patch representation is spliced together with its reprogrammed semantic counterpart in an alternating pattern, enabling the LLM to jointly perceive both numerical patterns and linguistic semantics.
