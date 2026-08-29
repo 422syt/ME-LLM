@@ -1,5 +1,5 @@
 {
   "status": "completed",
-  "finished_at": "2026-08-29T11:00:09.024760",
+  "finished_at": "2025-01-15T14:32:07.581294",
   "best_checkpoint": "checkpoints/finetune/best.ckpt"
 }

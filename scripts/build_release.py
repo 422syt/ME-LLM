@@ -22,7 +22,6 @@ import csv
 import json
 import os
 import shutil
-import datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -221,7 +220,7 @@ def write_aux():
 
 
 def main():
-    now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")
+    now = "2025-01-15T14:32:07.581294"
     for d in ("experiments", "expected", "manifests", "resources"):
         os.makedirs(os.path.join(ROOT, d), exist_ok=True)
 
