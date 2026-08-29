@@ -13,18 +13,23 @@ import time
 import random
 import numpy as np
 import os
+import json
 
 os.environ['CURL_CA_BUNDLE'] = ''
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:64"
 
-from utils.tools import del_files, EarlyStopping, adjust_learning_rate, vali, load_content
+from utils.tools import EarlyStopping, adjust_learning_rate, vali, load_content, sha256_file, git_commit
 
 parser = argparse.ArgumentParser(description='ME-LLM')
 
-fix_seed = 2021
-random.seed(fix_seed)
-torch.manual_seed(fix_seed)
-np.random.seed(fix_seed)
+
+def set_seed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 # basic config
 parser.add_argument('--task_name', type=str, required=True, default='long_term_forecast',
@@ -51,6 +56,8 @@ parser.add_argument('--freq', type=str, default='h',
                          'options:[s:secondly, t:minutely, h:hourly, d:daily, b:business days, w:weekly, m:monthly], '
                          'you can also use more detailed freq like 15min or 3h')
 parser.add_argument('--checkpoints', type=str, default='./checkpoints/', help='location of model checkpoints')
+parser.add_argument('--results', type=str, default='./results/', help='location to save result metrics')
+parser.add_argument('--configs', type=str, default='./configs/', help='location to save per-run config files')
 
 # forecasting task
 parser.add_argument('--seq_len', type=int, default=96, help='input sequence length')
@@ -95,15 +102,20 @@ parser.add_argument('--loss', type=str, default='MSE', help='loss function')
 parser.add_argument('--lradj', type=str, default='type1', help='adjust learning rate')
 parser.add_argument('--pct_start', type=float, default=0.2, help='pct_start')
 parser.add_argument('--use_amp', action='store_true', help='use automatic mixed precision training', default=False)
+parser.add_argument('--use_deepspeed', action='store_true', default=False, help='use DeepSpeed (multi-GPU)')
 parser.add_argument('--llm_layers', type=int, default=6)
 parser.add_argument('--percent', type=int, default=100)
 
 args = parser.parse_args()
 ddp_kwargs = DistributedDataParallelKwargs(find_unused_parameters=True)
-deepspeed_plugin = DeepSpeedPlugin(hf_ds_config='./ds_config_zero2.json')
-accelerator = Accelerator(kwargs_handlers=[ddp_kwargs], deepspeed_plugin=deepspeed_plugin)
+if args.use_deepspeed:
+    deepspeed_plugin = DeepSpeedPlugin(hf_ds_config='./ds_config_zero2.json')
+    accelerator = Accelerator(kwargs_handlers=[ddp_kwargs], deepspeed_plugin=deepspeed_plugin)
+else:
+    accelerator = Accelerator(kwargs_handlers=[ddp_kwargs])
 
 for ii in range(args.itr):
+    set_seed(args.seed + ii)
     # setting record of experiments
     setting = '{}_{}_{}_{}_ft{}_sl{}_ll{}_pl{}_dm{}_nh{}_el{}_dl{}_df{}_fc{}_eb{}_{}_{}'.format(
         args.task_name,
@@ -170,6 +182,12 @@ for ii in range(args.itr):
     if args.use_amp:
         scaler = torch.cuda.amp.GradScaler()
 
+    history = []
+    best_vali_loss = np.inf
+    best_test_loss = None
+    best_test_mae = None
+    best_epoch = None
+
     for epoch in range(args.train_epochs):
         iter_count = 0
         train_loss = []
@@ -193,7 +211,7 @@ for ii in range(args.itr):
 
             # encoder - decoder
             if args.use_amp:
-                with torch.cuda.amp.autocast():
+                with torch.cuda.amp.autocast(dtype=torch.bfloat16):
                     if args.output_attention:
                         outputs = model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
                     else:
@@ -245,6 +263,20 @@ for ii in range(args.itr):
             "Epoch: {0} | Train Loss: {1:.7f} Vali Loss: {2:.7f} Test Loss: {3:.7f} MAE Loss: {4:.7f}".format(
                 epoch + 1, train_loss, vali_loss, test_loss, test_mae_loss))
 
+        history.append({
+            "epoch": epoch + 1,
+            "train_loss": float(train_loss),
+            "vali_loss": float(vali_loss),
+            "vali_mae": float(vali_mae_loss),
+            "test_loss": float(test_loss),
+            "test_mae": float(test_mae_loss),
+        })
+        if vali_loss < best_vali_loss:
+            best_vali_loss = vali_loss
+            best_test_loss = test_loss
+            best_test_mae = test_mae_loss
+            best_epoch = epoch + 1
+
         early_stopping(vali_loss, model, path)
         if early_stopping.early_stop:
             accelerator.print("Early stopping")
@@ -263,8 +295,31 @@ for ii in range(args.itr):
         else:
             accelerator.print('Updating learning rate to {}'.format(scheduler.get_last_lr()[0]))
 
-accelerator.wait_for_everyone()
-if accelerator.is_local_main_process:
-    path = './checkpoints'  # unique checkpoint saving path
-    del_files(path)  # delete checkpoint files
-    accelerator.print('success delete checkpoints')
+    accelerator.wait_for_everyone()
+    if accelerator.is_local_main_process:
+        os.makedirs(args.results, exist_ok=True)
+        os.makedirs(args.configs, exist_ok=True)
+        result_file = os.path.join(args.results, setting + '-' + args.model_comment + '.json')
+        config_file = os.path.join(args.configs, setting + '-' + args.model_comment + '.json')
+        checkpoint_path = os.path.join(path, 'checkpoint')
+        config = vars(args).copy()
+        config.pop('content', None)
+        with open(config_file, 'w') as f:
+            json.dump(config, f, indent=2)
+        result = {
+            "config": config,
+            "config_file": config_file,
+            "seed": args.seed + ii,
+            "itr": ii,
+            "git_commit": git_commit(),
+            "best_epoch": best_epoch,
+            "best_vali_loss": float(best_vali_loss) if np.isfinite(best_vali_loss) else None,
+            "best_test_loss": float(best_test_loss) if best_test_loss is not None else None,
+            "best_test_mae": float(best_test_mae) if best_test_mae is not None else None,
+            "checkpoint": checkpoint_path,
+            "checkpoint_sha256": sha256_file(checkpoint_path) if os.path.exists(checkpoint_path) else None,
+            "history": history,
+        }
+        with open(result_file, 'w') as f:
+            json.dump(result, f, indent=2)
+        accelerator.print('Results saved to {}'.format(result_file))

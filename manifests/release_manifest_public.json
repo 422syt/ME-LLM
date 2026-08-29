@@ -1,0 +1,28 @@
+{
+  "release_name": "mellm_paper_release_v1.0.0",
+  "created_at": "2026-08-29T10:13:19Z",
+  "model": "ME-LLM",
+  "llm_backbone": "BERT-base (frozen, 768-dim, 12 layers)",
+  "trainable_params": "6.00M",
+  "datasets": [
+    "ETTh1",
+    "ETTh2",
+    "ETTm1",
+    "ETTm2",
+    "Weather",
+    "Traffic"
+  ],
+  "horizons": [
+    96,
+    192,
+    336,
+    720
+  ],
+  "seed_range": "2021-2030",
+  "n_seeds": 10,
+  "n_configs": 24,
+  "n_checkpoints": 0,
+  "checkpoint_note": "Model checkpoints are not shipped in this release, consistent with the official releases of Time-LLM (KimMeen/Time-LLM), TimesNet and iTransformer (thuml), which publish code and scripts only. Reported values are 10-seed means; they can be regenerated with scripts/repro/.",
+  "results": "expected/full_results.csv",
+  "configs": "configs/"
+}

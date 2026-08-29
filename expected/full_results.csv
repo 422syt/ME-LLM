@@ -1,0 +1,115 @@
+benchmark,dataset,pred_len,variant,seed,metric,value
+long_term_forecast,ETTh1,96,full,2021-2030,MSE,0.395
+long_term_forecast,ETTh1,96,full,2021-2030,MAE,0.407
+long_term_forecast,ETTh1,192,full,2021-2030,MSE,0.423
+long_term_forecast,ETTh1,192,full,2021-2030,MAE,0.425
+long_term_forecast,ETTh1,336,full,2021-2030,MSE,0.454
+long_term_forecast,ETTh1,336,full,2021-2030,MAE,0.463
+long_term_forecast,ETTh1,720,full,2021-2030,MSE,0.463
+long_term_forecast,ETTh1,720,full,2021-2030,MAE,0.472
+long_term_forecast,ETTh2,96,full,2021-2030,MSE,0.302
+long_term_forecast,ETTh2,96,full,2021-2030,MAE,0.349
+long_term_forecast,ETTh2,192,full,2021-2030,MSE,0.379
+long_term_forecast,ETTh2,192,full,2021-2030,MAE,0.396
+long_term_forecast,ETTh2,336,full,2021-2030,MSE,0.396
+long_term_forecast,ETTh2,336,full,2021-2030,MAE,0.427
+long_term_forecast,ETTh2,720,full,2021-2030,MSE,0.402
+long_term_forecast,ETTh2,720,full,2021-2030,MAE,0.436
+long_term_forecast,ETTm1,96,full,2021-2030,MSE,0.302
+long_term_forecast,ETTm1,96,full,2021-2030,MAE,0.348
+long_term_forecast,ETTm1,192,full,2021-2030,MSE,0.346
+long_term_forecast,ETTm1,192,full,2021-2030,MAE,0.375
+long_term_forecast,ETTm1,336,full,2021-2030,MSE,0.363
+long_term_forecast,ETTm1,336,full,2021-2030,MAE,0.399
+long_term_forecast,ETTm1,720,full,2021-2030,MSE,0.439
+long_term_forecast,ETTm1,720,full,2021-2030,MAE,0.441
+long_term_forecast,ETTm2,96,full,2021-2030,MSE,0.187
+long_term_forecast,ETTm2,96,full,2021-2030,MAE,0.273
+long_term_forecast,ETTm2,192,full,2021-2030,MSE,0.251
+long_term_forecast,ETTm2,192,full,2021-2030,MAE,0.312
+long_term_forecast,ETTm2,336,full,2021-2030,MSE,0.319
+long_term_forecast,ETTm2,336,full,2021-2030,MAE,0.357
+long_term_forecast,ETTm2,720,full,2021-2030,MSE,0.365
+long_term_forecast,ETTm2,720,full,2021-2030,MAE,0.391
+long_term_forecast,Weather,96,full,2021-2030,MSE,0.175
+long_term_forecast,Weather,96,full,2021-2030,MAE,0.201
+long_term_forecast,Weather,192,full,2021-2030,MSE,0.217
+long_term_forecast,Weather,192,full,2021-2030,MAE,0.251
+long_term_forecast,Weather,336,full,2021-2030,MSE,0.262
+long_term_forecast,Weather,336,full,2021-2030,MAE,0.279
+long_term_forecast,Weather,720,full,2021-2030,MSE,0.346
+long_term_forecast,Weather,720,full,2021-2030,MAE,0.352
+long_term_forecast,Traffic,96,full,2021-2030,MSE,0.403
+long_term_forecast,Traffic,96,full,2021-2030,MAE,0.276
+long_term_forecast,Traffic,192,full,2021-2030,MSE,0.415
+long_term_forecast,Traffic,192,full,2021-2030,MAE,0.289
+long_term_forecast,Traffic,336,full,2021-2030,MSE,0.421
+long_term_forecast,Traffic,336,full,2021-2030,MAE,0.29
+long_term_forecast,Traffic,720,full,2021-2030,MSE,0.432
+long_term_forecast,Traffic,720,full,2021-2030,MAE,0.295
+zero_shot,ETTh1->ETTh2,,full,2021-2030,MSE,0.351
+zero_shot,ETTm1->ETTm2,,full,2021-2030,MSE,0.262
+ablation,ETTh1,96,Full Model,2021-2030,MSE,0.395
+ablation,ETTh1,96,Full Model,2021-2030,MAE,0.407
+ablation,ETTh1,96,w/o Prompt,2021-2030,MSE,0.405
+ablation,ETTh1,96,w/o Prompt,2021-2030,MAE,0.414
+ablation,ETTh1,96,w/o LLM,2021-2030,MSE,0.396
+ablation,ETTh1,96,w/o LLM,2021-2030,MAE,0.409
+ablation,ETTh1,96,w/o Multimodal,2021-2030,MSE,0.413
+ablation,ETTh1,96,w/o Multimodal,2021-2030,MAE,0.431
+ablation,ETTh1,192,Full Model,2021-2030,MSE,0.423
+ablation,ETTh1,192,Full Model,2021-2030,MAE,0.425
+ablation,ETTh1,192,w/o Prompt,2021-2030,MSE,0.482
+ablation,ETTh1,192,w/o Prompt,2021-2030,MAE,0.453
+ablation,ETTh1,192,w/o LLM,2021-2030,MSE,0.455
+ablation,ETTh1,192,w/o LLM,2021-2030,MAE,0.447
+ablation,ETTh1,192,w/o Multimodal,2021-2030,MSE,0.454
+ablation,ETTh1,192,w/o Multimodal,2021-2030,MAE,0.46
+ablation,ETTh1,336,Full Model,2021-2030,MSE,0.454
+ablation,ETTh1,336,Full Model,2021-2030,MAE,0.463
+ablation,ETTh1,336,w/o Prompt,2021-2030,MSE,0.501
+ablation,ETTh1,336,w/o Prompt,2021-2030,MAE,0.479
+ablation,ETTh1,336,w/o LLM,2021-2030,MSE,0.492
+ablation,ETTh1,336,w/o LLM,2021-2030,MAE,0.503
+ablation,ETTh1,336,w/o Multimodal,2021-2030,MSE,0.514
+ablation,ETTh1,336,w/o Multimodal,2021-2030,MAE,0.454
+ablation,ETTh1,720,Full Model,2021-2030,MSE,0.463
+ablation,ETTh1,720,Full Model,2021-2030,MAE,0.472
+ablation,ETTh1,720,w/o Prompt,2021-2030,MSE,0.554
+ablation,ETTh1,720,w/o Prompt,2021-2030,MAE,0.512
+ablation,ETTh1,720,w/o LLM,2021-2030,MSE,0.563
+ablation,ETTh1,720,w/o LLM,2021-2030,MAE,0.525
+ablation,ETTh1,720,w/o Multimodal,2021-2030,MSE,0.532
+ablation,ETTh1,720,w/o Multimodal,2021-2030,MAE,0.512
+ablation,ETTh2,96,Full Model,2021-2030,MSE,0.302
+ablation,ETTh2,96,Full Model,2021-2030,MAE,0.349
+ablation,ETTh2,96,w/o Prompt,2021-2030,MSE,0.311
+ablation,ETTh2,96,w/o Prompt,2021-2030,MAE,0.352
+ablation,ETTh2,96,w/o LLM,2021-2030,MSE,0.305
+ablation,ETTh2,96,w/o LLM,2021-2030,MAE,0.356
+ablation,ETTh2,96,w/o Multimodal,2021-2030,MSE,0.324
+ablation,ETTh2,96,w/o Multimodal,2021-2030,MAE,0.379
+ablation,ETTh2,192,Full Model,2021-2030,MSE,0.379
+ablation,ETTh2,192,Full Model,2021-2030,MAE,0.396
+ablation,ETTh2,192,w/o Prompt,2021-2030,MSE,0.383
+ablation,ETTh2,192,w/o Prompt,2021-2030,MAE,0.405
+ablation,ETTh2,192,w/o LLM,2021-2030,MSE,0.381
+ablation,ETTh2,192,w/o LLM,2021-2030,MAE,0.397
+ablation,ETTh2,192,w/o Multimodal,2021-2030,MSE,0.38
+ablation,ETTh2,192,w/o Multimodal,2021-2030,MAE,0.403
+ablation,ETTh2,336,Full Model,2021-2030,MSE,0.396
+ablation,ETTh2,336,Full Model,2021-2030,MAE,0.427
+ablation,ETTh2,336,w/o Prompt,2021-2030,MSE,0.41
+ablation,ETTh2,336,w/o Prompt,2021-2030,MAE,0.432
+ablation,ETTh2,336,w/o LLM,2021-2030,MSE,0.415
+ablation,ETTh2,336,w/o LLM,2021-2030,MAE,0.437
+ablation,ETTh2,336,w/o Multimodal,2021-2030,MSE,0.405
+ablation,ETTh2,336,w/o Multimodal,2021-2030,MAE,0.429
+ablation,ETTh2,720,Full Model,2021-2030,MSE,0.402
+ablation,ETTh2,720,Full Model,2021-2030,MAE,0.436
+ablation,ETTh2,720,w/o Prompt,2021-2030,MSE,0.415
+ablation,ETTh2,720,w/o Prompt,2021-2030,MAE,0.443
+ablation,ETTh2,720,w/o LLM,2021-2030,MSE,0.453
+ablation,ETTh2,720,w/o LLM,2021-2030,MAE,0.472
+ablation,ETTh2,720,w/o Multimodal,2021-2030,MSE,0.475
+ablation,ETTh2,720,w/o Multimodal,2021-2030,MAE,0.486

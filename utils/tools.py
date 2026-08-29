@@ -2,6 +2,8 @@ import numpy as np
 import torch
 import matplotlib.pyplot as plt
 import shutil
+import hashlib
+import subprocess
 
 from tqdm import tqdm
 
@@ -43,7 +45,7 @@ class EarlyStopping:
         self.counter = 0
         self.best_score = None
         self.early_stop = False
-        self.val_loss_min = np.Inf
+        self.val_loss_min = np.inf
         self.delta = delta
         self.save_mode = save_mode
 
@@ -134,6 +136,22 @@ def del_files(dir_path):
     shutil.rmtree(dir_path)
 
 
+def sha256_file(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for chunk in iter(lambda: f.read(65536), b''):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def git_commit():
+    try:
+        return subprocess.check_output(
+            ['git', 'rev-parse', 'HEAD'], stderr=subprocess.DEVNULL).decode().strip()
+    except Exception:
+        return None
+
+
 def vali(args, accelerator, model, vali_data, vali_loader, criterion, mae_metric):
     total_loss = []
     total_mae_loss = []
@@ -152,7 +170,7 @@ def vali(args, accelerator, model, vali_data, vali_loader, criterion, mae_metric
                 accelerator.device)
             # encoder - decoder
             if args.use_amp:
-                with torch.cuda.amp.autocast():
+                with torch.cuda.amp.autocast(dtype=torch.bfloat16):
                     if args.output_attention:
                         outputs = model(batch_x, batch_x_mark, dec_inp, batch_y_mark)[0]
                     else:

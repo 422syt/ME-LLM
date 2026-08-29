@@ -89,7 +89,7 @@ class M4Dataset:
                          horizons=m4_info.Horizon.values,
                          values=np.load(
                              train_cache_file if training else test_cache_file,
-                             allow_pickle=True))
+                             allow_pickle=True)['values'])
 
 
 @dataclass()

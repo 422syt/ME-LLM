@@ -50,3 +50,15 @@ dataset/BeijingAirQuality/
 
 # Wheel files
 *.whl
+
+# Datasets (large files)
+dataset/Traffic/
+dataset/m4/
+
+# Logs
+logs/
+smoke_run.log
+smoke_test.log
+
+# Results (regenerated via scripts/repro/)
+results/

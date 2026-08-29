@@ -291,7 +291,7 @@ class ReprogrammingLayer(nn.Module):
         super(ReprogrammingLayer, self).__init__()
 
         d_keys = d_keys or (d_model // n_heads)
-        channel_num = 32
+        channel_num = d_model  # forecast() splits enc_out into d_model channels of size 1, so channel_num must equal d_model
         self.query_projection = nn.Linear(d_model // channel_num , d_keys * n_heads)
         self.key_projection = nn.Linear(d_llm , d_keys * n_heads)
         self.value_projection = nn.Linear(d_llm , d_keys * n_heads)

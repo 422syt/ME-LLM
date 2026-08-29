@@ -17,18 +17,23 @@ import pandas
 from utils.losses import smape_loss
 from utils.m4_summary import M4Summary
 import os
+import json
 
 os.environ['CURL_CA_BUNDLE'] = ''
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:64"
 
-from utils.tools import del_files, EarlyStopping, adjust_learning_rate, load_content, test
+from utils.tools import EarlyStopping, adjust_learning_rate, load_content, test, sha256_file, git_commit
 
 parser = argparse.ArgumentParser(description='ME-LLM')
 
-fix_seed = 2021
-random.seed(fix_seed)
-torch.manual_seed(fix_seed)
-np.random.seed(fix_seed)
+
+def set_seed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 # basic config
 parser.add_argument('--task_name', type=str, required=True, default='long_term_forecast',
@@ -81,11 +86,11 @@ parser.add_argument('--output_attention', action='store_true', help='whether to 
 parser.add_argument('--patch_len', type=int, default=16, help='patch length')
 parser.add_argument('--stride', type=int, default=8, help='stride')
 parser.add_argument('--prompt_domain', type=int, default=0, help='')
-parser.add_argument('--llm_model', type=str, default='LLAMA', help='LLM model') # LLAMA, GPT2, BERT
-parser.add_argument('--llm_dim', type=int, default='4096', help='LLM model dimension')# LLama7b:4096; GPT2-small:768; BERT-base:768
+parser.add_argument('--llm_model', type=str, default='BERT', help='LLM model') # LLAMA, GPT2, BERT
+parser.add_argument('--llm_dim', type=int, default=768, help='LLM model dimension')# LLama7b:4096; GPT2-small:768; BERT-base:768
 
 # optimization
-parser.add_argument('--num_workers', type=int, default=10, help='data loader num workers')
+parser.add_argument('--num_workers', type=int, default=0, help='data loader num workers')
 parser.add_argument('--itr', type=int, default=1, help='experiments times')
 parser.add_argument('--train_epochs', type=int, default=10, help='train epochs')
 parser.add_argument('--align_epochs', type=int, default=10, help='alignment epochs')
@@ -107,6 +112,7 @@ deepspeed_plugin = DeepSpeedPlugin(hf_ds_config='./ds_config_zero2.json')
 accelerator = Accelerator(kwargs_handlers=[ddp_kwargs], deepspeed_plugin=deepspeed_plugin)
 
 for ii in range(args.itr):
+    set_seed(args.seed + ii)
     # setting record of experiments
     setting = '{}_{}_{}_{}_ft{}_sl{}_ll{}_pl{}_dm{}_nh{}_el{}_dl{}_df{}_fc{}_eb{}_{}_{}'.format(
         args.task_name,
@@ -285,6 +291,24 @@ for ii in range(args.itr):
         forecasts_df.set_index(forecasts_df.columns[0], inplace=True)
         forecasts_df.to_csv(folder_path + args.seasonal_patterns + '_forecast.csv')
 
+        config = vars(args).copy()
+        config.pop('content', None)
+        config.pop('frequency_map', None)
+        run_result = {
+            "config": config,
+            "data": "m4",
+            "seasonal_patterns": args.seasonal_patterns,
+            "pred_len": args.pred_len,
+            "seed": args.seed + ii,
+            "itr": ii,
+            "git_commit": git_commit(),
+            "checkpoint": best_model_path,
+            "checkpoint_sha256": sha256_file(best_model_path) if os.path.exists(best_model_path) else None,
+        }
+        run_result_file = os.path.join(folder_path, args.seasonal_patterns + '_results.json')
+        with open(run_result_file, 'w') as f:
+            json.dump(run_result, f, indent=2, default=str)
+
         # calculate metrics
         accelerator.print(args.model)
         file_path = folder_path
@@ -301,11 +325,19 @@ for ii in range(args.itr):
             accelerator.print('mape:', mape)
             accelerator.print('mase:', mase)
             accelerator.print('owa:', owa_results)
+            metrics_result = {
+                "data": "m4",
+                "git_commit": git_commit(),
+                "smape": smape_results,
+                "owa": owa_results,
+                "mape": mape,
+                "mase": mase,
+            }
+            metrics_file = os.path.join(folder_path, 'metrics.json')
+            with open(metrics_file, 'w') as f:
+                json.dump(metrics_result, f, indent=2, default=float)
+            accelerator.print('M4 metrics saved to {}'.format(metrics_file))
         else:
             accelerator.print('After all 6 tasks are finished, you can calculate the averaged performance')
 
 accelerator.wait_for_everyone()
-if accelerator.is_local_main_process:
-    path = './checkpoints'  # unique checkpoint saving path
-    del_files(path)  # delete checkpoint files
-    accelerator.print('success delete checkpoints')
