@@ -1,0 +1,7 @@
+Repository: https://github.com/422syt/ME-LLM
+Archived release: https://github.com/422syt/ME-LLM/releases/tag/asoc-r2-v1.0
+Release tag: asoc-r2-v1.0
+
+Execution note:
+This archive is a compact reproducibility package, not a standalone runnable source distribution.
+For training or test execution, use the public repository checked out at tag asoc-r2-v1.0.

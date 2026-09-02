@@ -1,0 +1,17 @@
+control_group,variant,mean_MSE_over_24_tasks
+model_control,Full ME-LLM,0.351
+model_control,Random fixed prototypes,0.359
+model_control,Learned non-vocabulary prototypes,0.356
+model_control,Random frozen BERT,0.365
+model_control,Non-language Transformer,0.358
+model_control,Attention-only front end,0.362
+model_control,No local interleaving,0.357
+model_control,Length-matched null tokens,0.36
+prompt_control,Full prompt,0.351
+prompt_control,Without dataset description,0.353
+prompt_control,Without input statistics,0.359
+prompt_control,Without five lag values,0.356
+prompt_control,Factual paraphrase,0.352
+prompt_control,Random description,0.357
+prompt_control,Incorrect description,0.36
+prompt_control,Numerical feature embedding,0.354

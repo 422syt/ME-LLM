@@ -1,0 +1,3 @@
+model,R2,NSE,KGE,PBIAS_percent
+ME-LLM,0.781,0.774,0.822,1.9
+Time-VLM,0.769,0.762,0.811,2.3

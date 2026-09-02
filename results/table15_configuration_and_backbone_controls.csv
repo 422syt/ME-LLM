@@ -1,0 +1,5 @@
+factor,values_evaluated,result
+Prototype count,250;500;1000;2000,1000 selected; accuracy changes little beyond 1000 while front-end cost continues to increase
+Patch length,8;16;32,16 selected
+Stride,4;8;16,8 selected
+Backbone,BERT-base;GPT-2-base;random frozen Transformer,Mean MSE: 0.351;0.355;0.365

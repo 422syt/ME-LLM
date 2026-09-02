@@ -1,0 +1,14 @@
+model,mse_wins,mae_wins
+ME-LLM,15,18
+Time-VLM,5,3
+Time-Llama,0,0
+Time-LLM,3,1
+OneFitsAll,2,4
+iTransformer,1,5
+TiDE,0,0
+TimesNet,1,1
+DLinear,0,0
+PatchTST,3,1
+FEDformer,1,0
+Non-stationary Transformer,0,0
+Autoformer,0,0

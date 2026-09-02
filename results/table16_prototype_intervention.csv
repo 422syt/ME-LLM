@@ -1,0 +1,7 @@
+measure,result,unit
+Active prototypes across seeds,217,mean
+Active prototypes standard deviation,16,sd
+Normalized utilization entropy,0.71,mean
+Normalized utilization entropy standard deviation,0.02,sd
+MSE increase after masking most-used 10%,2.6,percent
+MSE increase after random masking,0.8,percent

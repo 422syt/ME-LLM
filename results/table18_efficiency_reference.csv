@@ -1,0 +1,4 @@
+model,backbone,ETTh1_average_MSE,total_parameters_M,trainable_parameters_M,time_per_epoch_minutes,peak_memory_GB,latency_seconds,input_length
+ME-LLM,BERT-base,0.433,116,6.0,7.23,8.6,0.192,96
+Time-LLM,LLaMA-7B,0.478,6652,6.39,181,29.5,0.291,96
+OneFitsAll,GPT2-base,0.465,117,4.0,7.36,9.5,0.201,96

@@ -1,0 +1,5 @@
+baseline,delta_mse_ME_LLM_minus_baseline,ci95_lower,ci95_upper,abs_dz,raw_p,holm_p
+Time-VLM,-0.005,-0.0069,-0.0031,1.89,0.000209,0.000209
+Time-Llama,-0.006,-0.0078,-0.0042,2.33,4.3e-05,8.6e-05
+Time-LLM,-0.018,-0.0203,-0.0157,5.66,2.4e-08,9.58e-08
+OneFitsAll,-0.013,-0.015,-0.011,4.74,1.13e-07,3.39e-07

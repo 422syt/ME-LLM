@@ -1,0 +1,391 @@
+dataset,horizon,model,publication_year,mse,mae,setting
+ETTm1,96,ME-LLM,This work,0.302,0.348,source-paper setting
+ETTm1,96,Time-VLM,2025,0.303,0.351,source-paper setting
+ETTm1,96,Time-Llama,2025,0.304,0.352,source-paper setting
+ETTm1,96,Time-LLM,2024,0.305,0.357,source-paper setting
+ETTm1,96,OneFitsAll,2024,0.330,0.372,source-paper setting
+ETTm1,96,iTransformer,2024,0.334,0.368,source-paper setting
+ETTm1,96,TiDE,2023,0.364,0.387,source-paper setting
+ETTm1,96,TimesNet,2023,0.338,0.375,source-paper setting
+ETTm1,96,DLinear,2023,0.345,0.372,source-paper setting
+ETTm1,96,PatchTST,2023,0.343,0.371,source-paper setting
+ETTm1,96,FEDformer,2022,0.379,0.419,source-paper setting
+ETTm1,96,Non-stationary Transformer,2022,0.386,0.398,source-paper setting
+ETTm1,96,Autoformer,2022,0.505,0.475,source-paper setting
+ETTm1,192,ME-LLM,This work,0.346,0.375,source-paper setting
+ETTm1,192,Time-VLM,2025,0.347,0.376,source-paper setting
+ETTm1,192,Time-Llama,2025,0.352,0.412,source-paper setting
+ETTm1,192,Time-LLM,2024,0.349,0.382,source-paper setting
+ETTm1,192,OneFitsAll,2024,0.398,0.409,source-paper setting
+ETTm1,192,iTransformer,2024,0.377,0.391,source-paper setting
+ETTm1,192,TiDE,2023,0.398,0.404,source-paper setting
+ETTm1,192,TimesNet,2023,0.374,0.387,source-paper setting
+ETTm1,192,DLinear,2023,0.380,0.389,source-paper setting
+ETTm1,192,PatchTST,2023,0.376,0.386,source-paper setting
+ETTm1,192,FEDformer,2022,0.426,0.441,source-paper setting
+ETTm1,192,Non-stationary Transformer,2022,0.459,0.444,source-paper setting
+ETTm1,192,Autoformer,2022,0.553,0.496,source-paper setting
+ETTm1,336,ME-LLM,This work,0.363,0.399,source-paper setting
+ETTm1,336,Time-VLM,2025,0.363,0.402,source-paper setting
+ETTm1,336,Time-Llama,2025,0.375,0.412,source-paper setting
+ETTm1,336,Time-LLM,2024,0.370,0.401,source-paper setting
+ETTm1,336,OneFitsAll,2024,0.398,0.409,source-paper setting
+ETTm1,336,iTransformer,2024,0.426,0.420,source-paper setting
+ETTm1,336,TiDE,2023,0.428,0.425,source-paper setting
+ETTm1,336,TimesNet,2023,0.410,0.411,source-paper setting
+ETTm1,336,DLinear,2023,0.413,0.413,source-paper setting
+ETTm1,336,PatchTST,2023,0.409,0.411,source-paper setting
+ETTm1,336,FEDformer,2022,0.445,0.459,source-paper setting
+ETTm1,336,Non-stationary Transformer,2022,0.495,0.464,source-paper setting
+ETTm1,336,Autoformer,2022,0.621,0.537,source-paper setting
+ETTm1,720,ME-LLM,This work,0.439,0.441,source-paper setting
+ETTm1,720,Time-VLM,2025,0.421,0.437,source-paper setting
+ETTm1,720,Time-Llama,2025,0.442,0.452,source-paper setting
+ETTm1,720,Time-LLM,2024,0.438,0.440,source-paper setting
+ETTm1,720,OneFitsAll,2024,0.454,0.440,source-paper setting
+ETTm1,720,iTransformer,2024,0.491,0.459,source-paper setting
+ETTm1,720,TiDE,2023,0.487,0.461,source-paper setting
+ETTm1,720,TimesNet,2023,0.478,0.450,source-paper setting
+ETTm1,720,DLinear,2023,0.474,0.453,source-paper setting
+ETTm1,720,PatchTST,2023,0.471,0.475,source-paper setting
+ETTm1,720,FEDformer,2022,0.543,0.490,source-paper setting
+ETTm1,720,Non-stationary Transformer,2022,0.585,0.516,source-paper setting
+ETTm1,720,Autoformer,2022,0.671,0.561,source-paper setting
+ETTm1,Avg,ME-LLM,This work,0.362,0.390,source-paper setting
+ETTm1,Avg,Time-VLM,2025,0.358,0.391,source-paper setting
+ETTm1,Avg,Time-Llama,2025,0.368,0.407,source-paper setting
+ETTm1,Avg,Time-LLM,2024,0.365,0.395,source-paper setting
+ETTm1,Avg,OneFitsAll,2024,0.388,0.403,source-paper setting
+ETTm1,Avg,iTransformer,2024,0.407,0.410,source-paper setting
+ETTm1,Avg,TiDE,2023,0.419,0.419,source-paper setting
+ETTm1,Avg,TimesNet,2023,0.400,0.406,source-paper setting
+ETTm1,Avg,DLinear,2023,0.403,0.407,source-paper setting
+ETTm1,Avg,PatchTST,2023,0.400,0.411,source-paper setting
+ETTm1,Avg,FEDformer,2022,0.448,0.452,source-paper setting
+ETTm1,Avg,Non-stationary Transformer,2022,0.481,0.456,source-paper setting
+ETTm1,Avg,Autoformer,2022,0.588,0.517,source-paper setting
+ETTm2,96,ME-LLM,This work,0.187,0.273,source-paper setting
+ETTm2,96,Time-VLM,2025,0.175,0.251,source-paper setting
+ETTm2,96,Time-Llama,2025,0.190,0.275,source-paper setting
+ETTm2,96,Time-LLM,2024,0.200,0.287,source-paper setting
+ETTm2,96,OneFitsAll,2024,0.192,0.281,source-paper setting
+ETTm2,96,iTransformer,2024,0.180,0.264,source-paper setting
+ETTm2,96,TiDE,2023,0.207,0.305,source-paper setting
+ETTm2,96,TimesNet,2023,0.187,0.267,source-paper setting
+ETTm2,96,DLinear,2023,0.193,0.292,source-paper setting
+ETTm2,96,PatchTST,2023,0.191,0.290,source-paper setting
+ETTm2,96,FEDformer,2022,0.203,0.287,source-paper setting
+ETTm2,96,Non-stationary Transformer,2022,0.192,0.274,source-paper setting
+ETTm2,96,Autoformer,2022,0.255,0.339,source-paper setting
+ETTm2,192,ME-LLM,This work,0.251,0.312,source-paper setting
+ETTm2,192,Time-VLM,2025,0.258,0.324,source-paper setting
+ETTm2,192,Time-Llama,2025,0.248,0.315,source-paper setting
+ETTm2,192,Time-LLM,2024,0.238,0.310,source-paper setting
+ETTm2,192,OneFitsAll,2024,0.245,0.317,source-paper setting
+ETTm2,192,iTransformer,2024,0.250,0.309,source-paper setting
+ETTm2,192,TiDE,2023,0.290,0.364,source-paper setting
+ETTm2,192,TimesNet,2023,0.249,0.309,source-paper setting
+ETTm2,192,DLinear,2023,0.284,0.362,source-paper setting
+ETTm2,192,PatchTST,2023,0.282,0.360,source-paper setting
+ETTm2,192,FEDformer,2022,0.269,0.328,source-paper setting
+ETTm2,192,Non-stationary Transformer,2022,0.280,0.339,source-paper setting
+ETTm2,192,Autoformer,2022,0.281,0.340,source-paper setting
+ETTm2,336,ME-LLM,This work,0.319,0.357,source-paper setting
+ETTm2,336,Time-VLM,2025,0.314,0.365,source-paper setting
+ETTm2,336,Time-Llama,2025,0.308,0.354,source-paper setting
+ETTm2,336,Time-LLM,2024,0.295,0.351,source-paper setting
+ETTm2,336,OneFitsAll,2024,0.302,0.352,source-paper setting
+ETTm2,336,iTransformer,2024,0.311,0.348,source-paper setting
+ETTm2,336,TiDE,2023,0.377,0.422,source-paper setting
+ETTm2,336,TimesNet,2023,0.321,0.351,source-paper setting
+ETTm2,336,DLinear,2023,0.369,0.427,source-paper setting
+ETTm2,336,PatchTST,2023,0.367,0.425,source-paper setting
+ETTm2,336,FEDformer,2022,0.325,0.366,source-paper setting
+ETTm2,336,Non-stationary Transformer,2022,0.334,0.361,source-paper setting
+ETTm2,336,Autoformer,2022,0.339,0.372,source-paper setting
+ETTm2,720,ME-LLM,This work,0.365,0.391,source-paper setting
+ETTm2,720,Time-VLM,2025,0.370,0.393,source-paper setting
+ETTm2,720,Time-Llama,2025,0.372,0.395,source-paper setting
+ETTm2,720,Time-LLM,2024,0.369,0.392,source-paper setting
+ETTm2,720,OneFitsAll,2024,0.386,0.392,source-paper setting
+ETTm2,720,iTransformer,2024,0.412,0.407,source-paper setting
+ETTm2,720,TiDE,2023,0.558,0.524,source-paper setting
+ETTm2,720,TimesNet,2023,0.408,0.403,source-paper setting
+ETTm2,720,DLinear,2023,0.554,0.522,source-paper setting
+ETTm2,720,PatchTST,2023,0.552,0.520,source-paper setting
+ETTm2,720,FEDformer,2022,0.421,0.415,source-paper setting
+ETTm2,720,Non-stationary Transformer,2022,0.417,0.413,source-paper setting
+ETTm2,720,Autoformer,2022,0.433,0.432,source-paper setting
+ETTm2,Avg,ME-LLM,This work,0.280,0.333,source-paper setting
+ETTm2,Avg,Time-VLM,2025,0.281,0.334,source-paper setting
+ETTm2,Avg,Time-Llama,2025,0.280,0.334,source-paper setting
+ETTm2,Avg,Time-LLM,2024,0.275,0.335,source-paper setting
+ETTm2,Avg,OneFitsAll,2024,0.284,0.338,source-paper setting
+ETTm2,Avg,iTransformer,2024,0.288,0.332,source-paper setting
+ETTm2,Avg,TiDE,2023,0.358,0.404,source-paper setting
+ETTm2,Avg,TimesNet,2023,0.291,0.333,source-paper setting
+ETTm2,Avg,DLinear,2023,0.350,0.401,source-paper setting
+ETTm2,Avg,PatchTST,2023,0.348,0.398,source-paper setting
+ETTm2,Avg,FEDformer,2022,0.305,0.349,source-paper setting
+ETTm2,Avg,Non-stationary Transformer,2022,0.306,0.347,source-paper setting
+ETTm2,Avg,Autoformer,2022,0.327,0.371,source-paper setting
+ETTh1,96,ME-LLM,This work,0.395,0.407,source-paper setting
+ETTh1,96,Time-VLM,2025,0.385,0.391,source-paper setting
+ETTh1,96,Time-Llama,2025,0.401,0.409,source-paper setting
+ETTh1,96,Time-LLM,2024,0.413,0.437,source-paper setting
+ETTh1,96,OneFitsAll,2024,0.422,0.428,source-paper setting
+ETTh1,96,iTransformer,2024,0.386,0.405,source-paper setting
+ETTh1,96,TiDE,2023,0.479,0.464,source-paper setting
+ETTh1,96,TimesNet,2023,0.384,0.402,source-paper setting
+ETTh1,96,DLinear,2023,0.386,0.400,source-paper setting
+ETTh1,96,PatchTST,2023,0.384,0.398,source-paper setting
+ETTh1,96,FEDformer,2022,0.376,0.419,source-paper setting
+ETTh1,96,Non-stationary Transformer,2022,0.513,0.491,source-paper setting
+ETTh1,96,Autoformer,2022,0.449,0.459,source-paper setting
+ETTh1,192,ME-LLM,This work,0.423,0.425,source-paper setting
+ETTh1,192,Time-VLM,2025,0.423,0.426,source-paper setting
+ETTh1,192,Time-Llama,2025,0.424,0.427,source-paper setting
+ETTh1,192,Time-LLM,2024,0.454,0.460,source-paper setting
+ETTh1,192,OneFitsAll,2024,0.466,0.450,source-paper setting
+ETTh1,192,iTransformer,2024,0.441,0.436,source-paper setting
+ETTh1,192,TiDE,2023,0.525,0.492,source-paper setting
+ETTh1,192,TimesNet,2023,0.436,0.429,source-paper setting
+ETTh1,192,DLinear,2023,0.437,0.432,source-paper setting
+ETTh1,192,PatchTST,2023,0.435,0.430,source-paper setting
+ETTh1,192,FEDformer,2022,0.420,0.448,source-paper setting
+ETTh1,192,Non-stationary Transformer,2022,0.534,0.504,source-paper setting
+ETTh1,192,Autoformer,2022,0.500,0.482,source-paper setting
+ETTh1,336,ME-LLM,This work,0.454,0.463,source-paper setting
+ETTh1,336,Time-VLM,2025,0.472,0.481,source-paper setting
+ETTh1,336,Time-Llama,2025,0.455,0.464,source-paper setting
+ETTh1,336,Time-LLM,2024,0.514,0.454,source-paper setting
+ETTh1,336,OneFitsAll,2024,0.488,0.464,source-paper setting
+ETTh1,336,iTransformer,2024,0.487,0.458,source-paper setting
+ETTh1,336,TiDE,2023,0.565,0.515,source-paper setting
+ETTh1,336,TimesNet,2023,0.491,0.469,source-paper setting
+ETTh1,336,DLinear,2023,0.481,0.459,source-paper setting
+ETTh1,336,PatchTST,2023,0.479,0.457,source-paper setting
+ETTh1,336,FEDformer,2022,0.459,0.465,source-paper setting
+ETTh1,336,Non-stationary Transformer,2022,0.588,0.535,source-paper setting
+ETTh1,336,Autoformer,2022,0.521,0.496,source-paper setting
+ETTh1,720,ME-LLM,This work,0.463,0.472,source-paper setting
+ETTh1,720,Time-VLM,2025,0.482,0.493,source-paper setting
+ETTh1,720,Time-Llama,2025,0.483,0.493,source-paper setting
+ETTh1,720,Time-LLM,2024,0.532,0.512,source-paper setting
+ETTh1,720,OneFitsAll,2024,0.485,0.478,source-paper setting
+ETTh1,720,iTransformer,2024,0.503,0.491,source-paper setting
+ETTh1,720,TiDE,2023,0.594,0.558,source-paper setting
+ETTh1,720,TimesNet,2023,0.521,0.500,source-paper setting
+ETTh1,720,DLinear,2023,0.519,0.516,source-paper setting
+ETTh1,720,PatchTST,2023,0.517,0.514,source-paper setting
+ETTh1,720,FEDformer,2022,0.506,0.507,source-paper setting
+ETTh1,720,Non-stationary Transformer,2022,0.643,0.616,source-paper setting
+ETTh1,720,Autoformer,2022,0.514,0.512,source-paper setting
+ETTh1,Avg,ME-LLM,This work,0.433,0.441,source-paper setting
+ETTh1,Avg,Time-VLM,2025,0.441,0.448,source-paper setting
+ETTh1,Avg,Time-Llama,2025,0.441,0.448,source-paper setting
+ETTh1,Avg,Time-LLM,2024,0.478,0.464,source-paper setting
+ETTh1,Avg,OneFitsAll,2024,0.465,0.455,source-paper setting
+ETTh1,Avg,iTransformer,2024,0.454,0.447,source-paper setting
+ETTh1,Avg,TiDE,2023,0.541,0.507,source-paper setting
+ETTh1,Avg,TimesNet,2023,0.458,0.450,source-paper setting
+ETTh1,Avg,DLinear,2023,0.456,0.452,source-paper setting
+ETTh1,Avg,PatchTST,2023,0.454,0.450,source-paper setting
+ETTh1,Avg,FEDformer,2022,0.440,0.460,source-paper setting
+ETTh1,Avg,Non-stationary Transformer,2022,0.570,0.537,source-paper setting
+ETTh1,Avg,Autoformer,2022,0.496,0.487,source-paper setting
+ETTh2,96,ME-LLM,This work,0.302,0.349,source-paper setting
+ETTh2,96,Time-VLM,2025,0.308,0.353,source-paper setting
+ETTh2,96,Time-Llama,2025,0.310,0.355,source-paper setting
+ETTh2,96,Time-LLM,2024,0.324,0.379,source-paper setting
+ETTh2,96,OneFitsAll,2024,0.318,0.368,source-paper setting
+ETTh2,96,iTransformer,2024,0.297,0.349,source-paper setting
+ETTh2,96,TiDE,2023,0.400,0.440,source-paper setting
+ETTh2,96,TimesNet,2023,0.340,0.374,source-paper setting
+ETTh2,96,DLinear,2023,0.333,0.387,source-paper setting
+ETTh2,96,PatchTST,2023,0.331,0.385,source-paper setting
+ETTh2,96,FEDformer,2022,0.358,0.397,source-paper setting
+ETTh2,96,Non-stationary Transformer,2022,0.476,0.458,source-paper setting
+ETTh2,96,Autoformer,2022,0.346,0.388,source-paper setting
+ETTh2,192,ME-LLM,This work,0.379,0.396,source-paper setting
+ETTh2,192,Time-VLM,2025,0.381,0.398,source-paper setting
+ETTh2,192,Time-Llama,2025,0.382,0.400,source-paper setting
+ETTh2,192,Time-LLM,2024,0.380,0.403,source-paper setting
+ETTh2,192,OneFitsAll,2024,0.383,0.407,source-paper setting
+ETTh2,192,iTransformer,2024,0.380,0.400,source-paper setting
+ETTh2,192,TiDE,2023,0.528,0.509,source-paper setting
+ETTh2,192,TimesNet,2023,0.402,0.414,source-paper setting
+ETTh2,192,DLinear,2023,0.477,0.476,source-paper setting
+ETTh2,192,PatchTST,2023,0.475,0.474,source-paper setting
+ETTh2,192,FEDformer,2022,0.429,0.439,source-paper setting
+ETTh2,192,Non-stationary Transformer,2022,0.512,0.493,source-paper setting
+ETTh2,192,Autoformer,2022,0.456,0.452,source-paper setting
+ETTh2,336,ME-LLM,This work,0.396,0.427,source-paper setting
+ETTh2,336,Time-VLM,2025,0.399,0.429,source-paper setting
+ETTh2,336,Time-Llama,2025,0.400,0.430,source-paper setting
+ETTh2,336,Time-LLM,2024,0.405,0.429,source-paper setting
+ETTh2,336,OneFitsAll,2024,0.406,0.427,source-paper setting
+ETTh2,336,iTransformer,2024,0.428,0.432,source-paper setting
+ETTh2,336,TiDE,2023,0.643,0.571,source-paper setting
+ETTh2,336,TimesNet,2023,0.452,0.452,source-paper setting
+ETTh2,336,DLinear,2023,0.594,0.541,source-paper setting
+ETTh2,336,PatchTST,2023,0.592,0.539,source-paper setting
+ETTh2,336,FEDformer,2022,0.496,0.487,source-paper setting
+ETTh2,336,Non-stationary Transformer,2022,0.552,0.551,source-paper setting
+ETTh2,336,Autoformer,2022,0.482,0.486,source-paper setting
+ETTh2,720,ME-LLM,This work,0.402,0.436,source-paper setting
+ETTh2,720,Time-VLM,2025,0.406,0.439,source-paper setting
+ETTh2,720,Time-Llama,2025,0.408,0.440,source-paper setting
+ETTh2,720,Time-LLM,2024,0.475,0.486,source-paper setting
+ETTh2,720,OneFitsAll,2024,0.420,0.446,source-paper setting
+ETTh2,720,iTransformer,2024,0.427,0.445,source-paper setting
+ETTh2,720,TiDE,2023,0.874,0.679,source-paper setting
+ETTh2,720,TimesNet,2023,0.462,0.468,source-paper setting
+ETTh2,720,DLinear,2023,0.831,0.657,source-paper setting
+ETTh2,720,PatchTST,2023,0.829,0.655,source-paper setting
+ETTh2,720,FEDformer,2022,0.463,0.474,source-paper setting
+ETTh2,720,Non-stationary Transformer,2022,0.562,0.560,source-paper setting
+ETTh2,720,Autoformer,2022,0.515,0.511,source-paper setting
+ETTh2,Avg,ME-LLM,This work,0.369,0.402,source-paper setting
+ETTh2,Avg,Time-VLM,2025,0.373,0.404,source-paper setting
+ETTh2,Avg,Time-Llama,2025,0.375,0.406,source-paper setting
+ETTh2,Avg,Time-LLM,2024,0.396,0.424,source-paper setting
+ETTh2,Avg,OneFitsAll,2024,0.381,0.412,source-paper setting
+ETTh2,Avg,iTransformer,2024,0.383,0.406,source-paper setting
+ETTh2,Avg,TiDE,2023,0.611,0.550,source-paper setting
+ETTh2,Avg,TimesNet,2023,0.414,0.427,source-paper setting
+ETTh2,Avg,DLinear,2023,0.559,0.515,source-paper setting
+ETTh2,Avg,PatchTST,2023,0.556,0.513,source-paper setting
+ETTh2,Avg,FEDformer,2022,0.437,0.449,source-paper setting
+ETTh2,Avg,Non-stationary Transformer,2022,0.526,0.516,source-paper setting
+ETTh2,Avg,Autoformer,2022,0.450,0.459,source-paper setting
+Weather,96,ME-LLM,This work,0.175,0.201,source-paper setting
+Weather,96,Time-VLM,2025,0.176,0.203,source-paper setting
+Weather,96,Time-Llama,2025,0.178,0.205,source-paper setting
+Weather,96,Time-LLM,2024,0.213,0.248,source-paper setting
+Weather,96,OneFitsAll,2024,0.181,0.232,source-paper setting
+Weather,96,iTransformer,2024,0.174,0.214,source-paper setting
+Weather,96,TiDE,2023,0.202,0.261,source-paper setting
+Weather,96,TimesNet,2023,0.172,0.220,source-paper setting
+Weather,96,DLinear,2023,0.196,0.255,source-paper setting
+Weather,96,PatchTST,2023,0.194,0.253,source-paper setting
+Weather,96,FEDformer,2022,0.217,0.296,source-paper setting
+Weather,96,Non-stationary Transformer,2022,0.173,0.223,source-paper setting
+Weather,96,Autoformer,2022,0.266,0.336,source-paper setting
+Weather,192,ME-LLM,This work,0.217,0.251,source-paper setting
+Weather,192,Time-VLM,2025,0.218,0.252,source-paper setting
+Weather,192,Time-Llama,2025,0.220,0.254,source-paper setting
+Weather,192,Time-LLM,2024,0.254,0.261,source-paper setting
+Weather,192,OneFitsAll,2024,0.222,0.266,source-paper setting
+Weather,192,iTransformer,2024,0.221,0.254,source-paper setting
+Weather,192,TiDE,2023,0.242,0.298,source-paper setting
+Weather,192,TimesNet,2023,0.219,0.261,source-paper setting
+Weather,192,DLinear,2023,0.237,0.296,source-paper setting
+Weather,192,PatchTST,2023,0.235,0.294,source-paper setting
+Weather,192,FEDformer,2022,0.276,0.336,source-paper setting
+Weather,192,Non-stationary Transformer,2022,0.245,0.285,source-paper setting
+Weather,192,Autoformer,2022,0.307,0.367,source-paper setting
+Weather,336,ME-LLM,This work,0.262,0.279,source-paper setting
+Weather,336,Time-VLM,2025,0.269,0.287,source-paper setting
+Weather,336,Time-Llama,2025,0.270,0.291,source-paper setting
+Weather,336,Time-LLM,2024,0.288,0.328,source-paper setting
+Weather,336,OneFitsAll,2024,0.270,0.299,source-paper setting
+Weather,336,iTransformer,2024,0.278,0.296,source-paper setting
+Weather,336,TiDE,2023,0.283,0.335,source-paper setting
+Weather,336,TimesNet,2023,0.280,0.306,source-paper setting
+Weather,336,DLinear,2023,0.283,0.335,source-paper setting
+Weather,336,PatchTST,2023,0.281,0.333,source-paper setting
+Weather,336,FEDformer,2022,0.339,0.380,source-paper setting
+Weather,336,Non-stationary Transformer,2022,0.321,0.338,source-paper setting
+Weather,336,Autoformer,2022,0.359,0.395,source-paper setting
+Weather,720,ME-LLM,This work,0.346,0.352,source-paper setting
+Weather,720,Time-VLM,2025,0.347,0.353,source-paper setting
+Weather,720,Time-Llama,2025,0.348,0.354,source-paper setting
+Weather,720,Time-LLM,2024,0.343,0.355,source-paper setting
+Weather,720,OneFitsAll,2024,0.338,0.345,source-paper setting
+Weather,720,iTransformer,2024,0.358,0.347,source-paper setting
+Weather,720,TiDE,2023,0.351,0.386,source-paper setting
+Weather,720,TimesNet,2023,0.365,0.359,source-paper setting
+Weather,720,DLinear,2023,0.345,0.381,source-paper setting
+Weather,720,PatchTST,2023,0.343,0.379,source-paper setting
+Weather,720,FEDformer,2022,0.463,0.428,source-paper setting
+Weather,720,Non-stationary Transformer,2022,0.414,0.410,source-paper setting
+Weather,720,Autoformer,2022,0.419,0.428,source-paper setting
+Weather,Avg,ME-LLM,This work,0.250,0.271,source-paper setting
+Weather,Avg,Time-VLM,2025,0.253,0.274,source-paper setting
+Weather,Avg,Time-Llama,2025,0.254,0.276,source-paper setting
+Weather,Avg,Time-LLM,2024,0.275,0.298,source-paper setting
+Weather,Avg,OneFitsAll,2024,0.252,0.285,source-paper setting
+Weather,Avg,iTransformer,2024,0.258,0.278,source-paper setting
+Weather,Avg,TiDE,2023,0.271,0.320,source-paper setting
+Weather,Avg,TimesNet,2023,0.259,0.287,source-paper setting
+Weather,Avg,DLinear,2023,0.265,0.317,source-paper setting
+Weather,Avg,PatchTST,2023,0.263,0.315,source-paper setting
+Weather,Avg,FEDformer,2022,0.309,0.360,source-paper setting
+Weather,Avg,Non-stationary Transformer,2022,0.288,0.314,source-paper setting
+Weather,Avg,Autoformer,2022,0.338,0.382,source-paper setting
+Traffic,96,ME-LLM,This work,0.403,0.276,source-paper setting
+Traffic,96,Time-VLM,2025,0.400,0.274,source-paper setting
+Traffic,96,Time-Llama,2025,0.401,0.275,source-paper setting
+Traffic,96,Time-LLM,2024,0.392,0.280,source-paper setting
+Traffic,96,OneFitsAll,2024,0.390,0.272,source-paper setting
+Traffic,96,iTransformer,2024,0.395,0.268,source-paper setting
+Traffic,96,TiDE,2023,0.805,0.493,source-paper setting
+Traffic,96,TimesNet,2023,0.593,0.321,source-paper setting
+Traffic,96,DLinear,2023,0.650,0.396,source-paper setting
+Traffic,96,PatchTST,2023,0.385,0.280,source-paper setting
+Traffic,96,FEDformer,2022,0.587,0.366,source-paper setting
+Traffic,96,Non-stationary Transformer,2022,0.612,0.338,source-paper setting
+Traffic,96,Autoformer,2022,0.613,0.388,source-paper setting
+Traffic,192,ME-LLM,This work,0.415,0.289,source-paper setting
+Traffic,192,Time-VLM,2025,0.412,0.287,source-paper setting
+Traffic,192,Time-Llama,2025,0.413,0.288,source-paper setting
+Traffic,192,Time-LLM,2024,0.412,0.291,source-paper setting
+Traffic,192,OneFitsAll,2024,0.403,0.276,source-paper setting
+Traffic,192,iTransformer,2024,0.417,0.276,source-paper setting
+Traffic,192,TiDE,2023,0.756,0.474,source-paper setting
+Traffic,192,TimesNet,2023,0.617,0.336,source-paper setting
+Traffic,192,DLinear,2023,0.598,0.370,source-paper setting
+Traffic,192,PatchTST,2023,0.398,0.274,source-paper setting
+Traffic,192,FEDformer,2022,0.604,0.373,source-paper setting
+Traffic,192,Non-stationary Transformer,2022,0.613,0.340,source-paper setting
+Traffic,192,Autoformer,2022,0.616,0.382,source-paper setting
+Traffic,336,ME-LLM,This work,0.421,0.290,source-paper setting
+Traffic,336,Time-VLM,2025,0.418,0.288,source-paper setting
+Traffic,336,Time-Llama,2025,0.419,0.289,source-paper setting
+Traffic,336,Time-LLM,2024,0.434,0.304,source-paper setting
+Traffic,336,OneFitsAll,2024,0.413,0.280,source-paper setting
+Traffic,336,iTransformer,2024,0.433,0.283,source-paper setting
+Traffic,336,TiDE,2023,0.762,0.477,source-paper setting
+Traffic,336,TimesNet,2023,0.629,0.336,source-paper setting
+Traffic,336,DLinear,2023,0.605,0.373,source-paper setting
+Traffic,336,PatchTST,2023,0.414,0.285,source-paper setting
+Traffic,336,FEDformer,2022,0.621,0.383,source-paper setting
+Traffic,336,Non-stationary Transformer,2022,0.618,0.328,source-paper setting
+Traffic,336,Autoformer,2022,0.622,0.337,source-paper setting
+Traffic,720,ME-LLM,This work,0.432,0.295,source-paper setting
+Traffic,720,Time-VLM,2025,0.482,0.325,source-paper setting
+Traffic,720,Time-Llama,2025,0.451,0.312,source-paper setting
+Traffic,720,Time-LLM,2024,0.465,0.314,source-paper setting
+Traffic,720,OneFitsAll,2024,0.447,0.298,source-paper setting
+Traffic,720,iTransformer,2024,0.467,0.302,source-paper setting
+Traffic,720,TiDE,2023,0.719,0.449,source-paper setting
+Traffic,720,TimesNet,2023,0.640,0.350,source-paper setting
+Traffic,720,DLinear,2023,0.645,0.394,source-paper setting
+Traffic,720,PatchTST,2023,0.448,0.301,source-paper setting
+Traffic,720,FEDformer,2022,0.626,0.382,source-paper setting
+Traffic,720,Non-stationary Transformer,2022,0.653,0.355,source-paper setting
+Traffic,720,Autoformer,2022,0.660,0.408,source-paper setting
+Traffic,Avg,ME-LLM,This work,0.417,0.287,source-paper setting
+Traffic,Avg,Time-VLM,2025,0.428,0.293,source-paper setting
+Traffic,Avg,Time-Llama,2025,0.421,0.291,source-paper setting
+Traffic,Avg,Time-LLM,2024,0.425,0.298,source-paper setting
+Traffic,Avg,OneFitsAll,2024,0.413,0.281,source-paper setting
+Traffic,Avg,iTransformer,2024,0.428,0.282,source-paper setting
+Traffic,Avg,TiDE,2023,0.760,0.473,source-paper setting
+Traffic,Avg,TimesNet,2023,0.620,0.336,source-paper setting
+Traffic,Avg,DLinear,2023,0.625,0.383,source-paper setting
+Traffic,Avg,PatchTST,2023,0.411,0.285,source-paper setting
+Traffic,Avg,FEDformer,2022,0.610,0.376,source-paper setting
+Traffic,Avg,Non-stationary Transformer,2022,0.624,0.340,source-paper setting
+Traffic,Avg,Autoformer,2022,0.628,0.379,source-paper setting

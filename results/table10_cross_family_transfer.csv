@@ -1,0 +1,4 @@
+source_to_target,ME-LLM_MSE,PatchTST_MSE,relative_reduction_percent
+ETTm1 to Weather,0.286,0.301,5.0
+Weather to ETTm1,0.413,0.428,3.5
+Traffic to ETTh1,0.479,0.497,3.6

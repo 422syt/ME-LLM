@@ -1,0 +1,3 @@
+model,MSE,MAE
+ME-LLM,0.214,0.281
+WaveKoop-KAN,0.219,0.286

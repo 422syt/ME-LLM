@@ -1,0 +1,7 @@
+dataset,time_per_epoch_minutes,peak_memory_GB,batch1_latency_seconds,look_back_length,hardware
+ETTh1,11.8,12.9,0.276,512,NVIDIA RTX A6000
+ETTh2,11.5,12.8,0.272,512,NVIDIA RTX A6000
+ETTm1,13.9,13.1,0.281,512,NVIDIA RTX A6000
+ETTm2,13.6,13.0,0.279,512,NVIDIA RTX A6000
+Weather,16.7,14.6,0.296,512,NVIDIA RTX A6000
+Traffic,31.6,21.7,0.394,512,NVIDIA RTX A6000
